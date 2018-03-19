@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+<body>
+    <header>
+        <a href="~/Home/Index"><img src="~/Content/img/nps-logo-about (1).png" alt="National Park Geek" class="LogoImage"/></a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="~/Home/Index">Home</a></li>
+            <li><a href="~/Survey/NewSurvey">Survey</a></li>
+            <li><a href="~/Survey/Favorites">Favorites</a></li>
+        </ul>
+
+    </nav>
+    <section id="main-content">
+        @RenderBody()
+    </section>
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿
+@using Capstone.Web.Models
+@model Survey
+
+
+<img src="~/Content/img/survey.png" alt="Survey Image" class="LogoImage2" />
+
+@using (Html.BeginForm("NewSurvey", "Survey", FormMethod.Post))
+{
+<div class="row" style="width:99%">
+    <div class="col-md-8; survey">
+        <pre>
+      @Html.Label("ParkCode", "Select your Favorite Park: ")       @Html.DropDownListFor(m => m.ParkCode, Survey.ParkCodeList) @Html.ValidationMessageFor(m => m.ParkCode)
+      @Html.Label("Email", "Email Address:")                        @Html.EditorFor(m => m.Email) @Html.ValidationMessageFor(m => m.Email)
+      @Html.Label("State", "State of Residence: ")                 @Html.TextBoxFor(m => m.State)         @Html.ValidationMessageFor(m => m.State)
+      @Html.Label("ActivityLevel", "Please select your activity level:")  @Html.Label("Inactive", "Inactive ") @Html.RadioButtonFor(m => m.ActivityLevel, "inactive", new { id = "Inactive" }) @Html.Label("Sedetary", "Sedetary ")  @Html.RadioButtonFor(m => m.ActivityLevel, "sedentary", new { id = "Sedetary" }) @Html.Label("Active", "Active ") @Html.RadioButtonFor(m => m.ActivityLevel, "active", new { id = "Active" }) @Html.Label("Extremely Active", "Extremely Active ") @Html.RadioButtonFor(m => m.ActivityLevel, "extremely active", new { id = "Extremely Active" })
+                                                      <button class="btn" type="submit">Vote Your Favorite!</button>
+</pre>       
+    </div>
+</div>
+}
+

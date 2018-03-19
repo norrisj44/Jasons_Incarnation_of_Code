@@ -1,0 +1,33 @@
+﻿@using Capstone.Web.Models
+@model List<Park>
+
+@*<section>*@
+<h2 class="headers">National Parks</h2>
+<hr />
+
+
+
+@foreach (var park in Model)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6"style="margin:auto">
+                @{string parkLink = "../Home/Detail/" + park.ParkCode;}
+                @{string image = "../Content/img/parks/" + @park.ParkCode + ".jpg";}
+                <a href="@parkLink"><img src="@image" alt="@park.ParkCode" class="ParkImage" /></a>
+            </div>
+            <div class="col-lg-6" style="margin:auto; padding-right:50px">
+
+                <a href="@parkLink"><p1 class="ParkName">@park.ParkName</p1></a><br />
+
+                @park.State
+                @park.ParkDescription
+            </div>
+        </div>
+        <hr />
+    </div>
+}
+
+
+
+@*</section>*@

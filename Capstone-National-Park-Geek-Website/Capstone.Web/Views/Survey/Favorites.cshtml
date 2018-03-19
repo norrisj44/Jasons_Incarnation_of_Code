@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Favorites";
+}
+@using Capstone.Web.Models
+@model List<Survey>
+
+<h2 class="headers">Favorite Parks</h2><hr />
+
+
+<div>
+    @foreach (var park in Model)
+    {
+        string parkLink = "../Home/Detail/" + park.ParkCode;
+
+        <div class="container">
+            <div class="col-md-6" style="display: inline">
+                @{string image = "../Content/img/parks/" + @park.ParkCode + ".jpg";}
+                <a  href="@parkLink"><img src="@image" alt="@park.ParkCode" class="ParkImageFavorites" /></a>
+            </div>
+            <div class="col-md-6" style="float:right">
+                <pre>
+
+
+
+
+                    <h1 style="font-size:30px"><a href="@parkLink">@park.ParkName</a></h1><p style="font-size:20px">Number of Votes: @park.FavoriteCount</p>
+                    </pre>
+            </div>
+            <hr /><br />
+        </div>
+    }
+</div>

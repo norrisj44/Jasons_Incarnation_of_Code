@@ -1,0 +1,136 @@
+﻿
+@using Capstone.Web.Models;
+@model Park
+
+@{
+
+    List<Weather> weatherList = Session["Weather"] as List<Weather>;
+    string parkimg = $"{Model.ParkCode}.jpg";
+    Park newpark = Model;
+    int count = 0;
+}
+
+
+@using (Html.BeginForm("Detail", "Home", FormMethod.Post))
+{
+    <div class="container" style="margin-right:auto">
+        <div class="row">
+            <div class="col-lg-6">
+                <img class="imaggge" src="~/Content/img/parks/@parkimg" alt="National Park Image" />
+            </div>
+            <div class="col-lg-6">
+                <pre class="DetailInfo">
+       
+                <b style="font-size:24px">@Model.ParkName </b>
+                  @Model.State | Year Founded: @Model.YearFounded 
+
+                <b>Climate:</b> @Model.Climate
+                <b>Acerage:</b> @Model.Acreage.ToString("#,##0")
+                <b>Elevation:</b> @Model.Elevation.ToString("#,##0") ft
+                <b>Miles of Trail:</b> @Model.MilesOfTrail.ToString("#,##0")
+                <b>No. Of Campsites:</b> @Model.NumberOfCampsites
+                <b>Annual Visitors:</b> @Model.AnnualVisitorCount.ToString("#,##0")
+                <b>No. of Animal Species:</b> @Model.NumberOfAnimalSpecies.ToString("#,##0")
+                <b>Entry Fee:</b> $@Model.EntryFee
+
+</pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <pre style="font-size: 16px">
+
+                <i>"@Model.InspirationalQuote"</i>
+
+<i>- @Model.QuoteSource</i>
+</pre>
+            </div>
+            <div class="col-md-6">
+                <p class="description">@Model.ParkDescription</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table>
+                <tr>
+                    <th style="border:none">TODAY</th>
+                </tr>
+                <tr>
+                    @foreach (Weather item in weatherList)
+                    {
+                        string weatherImg = $"{item.Forecast}.png";
+                        if (Model.TempValue == 1)
+                        {
+                            if (count == 0)
+                            {
+                                <td>
+                                    <img src="~/Content/img/weather/@weatherImg" alt="Weather Image" /><br />
+                                    High: <b class="Temphigh">
+                                        @Model.CelsiusConversion(item.High)°C
+                                    </b> Low: <b class="Templow">@Model.CelsiusConversion(item.Low)°C</b><br />
+                                    @item.Forecast.Substring(0, 1).ToUpper()@item.Forecast.Substring(1) <br />
+                                    <span style="padding-left:10px">@item.WeatherRecommendation(item.Forecast, item.High, item.Low)</span>
+                                </td>
+                            }
+                            else if (count >= 1)
+                            {
+                                <td>
+                                    <img class="weatherImgSmaller" src="~/Content/img/weather/@weatherImg" alt="Weather Image" />
+                                    <br />
+                                    High: <b class="Temphigh">@Model.CelsiusConversion(item.High)°C</b> Low: <b class="Templow">@Model.CelsiusConversion(item.Low)°C</b><br />
+                                </td>
+                            }
+                            count++;
+                        }
+                        else
+                        {
+                            if (count == 0)
+                            {
+                                <td>
+                                    <img src="~/Content/img/weather/@weatherImg" alt="Weather Image" /><br />
+                                    High: <b class="Temphigh">@item.High°F</b> Low: <b class="Templow">@item.Low°F</b><br />
+                                    @item.Forecast.Substring(0, 1).ToUpper()@item.Forecast.Substring(1) <br />
+                                    <span style="padding-left:10px">@item.WeatherRecommendation(item.Forecast, item.High, item.Low)</span>
+                                </td>
+                            }
+                            else if (count >= 1)
+                            {
+                                <td>
+                                    <img class="weatherImgSmaller" src="~/Content/img/weather/@weatherImg" alt="Weather Image" />
+                                    <br />
+                                    High: <b class="Temphigh">@item.High°F</b> Low:<b class="Templow">@item.Low°F</b><br />
+                                </td>
+                            }
+                            count++;
+                        }
+                    }
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-12">
+            <p>
+                @Html.Label("Fahrenheit")
+                @Html.RadioButtonFor(m => m.TempValue, 0)
+                @Html.Label("Celsius")
+                @Html.RadioButtonFor(m => m.TempValue, 1)
+                @Html.HiddenFor(m => m.Acreage)
+                @Html.HiddenFor(m => m.AnnualVisitorCount)
+                @Html.HiddenFor(m => m.Climate)
+                @Html.HiddenFor(m => m.Elevation)
+                @Html.HiddenFor(m => m.EntryFee)
+                @Html.HiddenFor(m => m.InspirationalQuote)
+                @Html.HiddenFor(m => m.MilesOfTrail)
+                @Html.HiddenFor(m => m.NumberOfAnimalSpecies)
+                @Html.HiddenFor(m => m.NumberOfCampsites)
+                @Html.HiddenFor(m => m.ParkCode)
+                @Html.HiddenFor(m => m.ParkDescription)
+                @Html.HiddenFor(m => m.ParkName)
+                @Html.HiddenFor(m => m.QuoteSource)
+                @Html.HiddenFor(m => m.State)
+                @Html.HiddenFor(m => m.YearFounded)
+                <button class="btn">Submit</button>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+}
