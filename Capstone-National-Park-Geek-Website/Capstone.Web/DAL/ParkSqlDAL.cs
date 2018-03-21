@@ -46,7 +46,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }
@@ -93,7 +93,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }
@@ -127,7 +127,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }

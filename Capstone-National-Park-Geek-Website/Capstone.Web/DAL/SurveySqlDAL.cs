@@ -43,7 +43,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -70,9 +70,8 @@ namespace Capstone.Web.DAL
                     return (rowsAffected > 0); //true if one row was affected
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
 

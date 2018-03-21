@@ -6,7 +6,6 @@
 
     List<Weather> weatherList = Session["Weather"] as List<Weather>;
     string parkimg = $"{Model.ParkCode}.jpg";
-    Park newpark = Model;
     int count = 0;
 }
 
@@ -16,7 +15,7 @@
     <div class="container" style="margin-right:auto">
         <div class="row">
             <div class="col-lg-6">
-                <img class="imaggge" src="~/Content/img/parks/@parkimg" alt="National Park Image" />
+                <img class="DetailedParkimg" src="~/Content/img/parks/@parkimg" alt="National Park Image" />
             </div>
             <div class="col-lg-6">
                 <pre class="DetailInfo">
